@@ -41,6 +41,7 @@ const EntryForm = ({ onSave, onCancel }) => {
         <input
           type="date"
           className="w-full border text-white  p-2 rounded"
+          
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
@@ -56,6 +57,7 @@ const EntryForm = ({ onSave, onCancel }) => {
         <textarea
           placeholder="Content"
           className="w-full border text-white  p-2 rounded"
+
           rows="4"
           value={content}
           onChange={(e) => setContent(e.target.value)}

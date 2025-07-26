@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import EntryForm from "./components/EntryForm";
@@ -9,6 +7,7 @@ import Fotter from "./components/Fotter";
 const App = () => {
   const [entries, setEntries] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [showList, setShowList] = useState(false);
 
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem("entries")) || [];
@@ -22,7 +21,7 @@ const App = () => {
   const addEntry = (newEntry) => {
     const exist = entries.some((e) => e.date === newEntry.date);
     if (exist) {
-      alert("There is already an entry with this date, Write another!");
+      alert("There is already an entry in  this date, Write it  another day!");
       return;
     }
     const update = [newEntry, ...entries];
@@ -40,42 +39,53 @@ const App = () => {
       className="min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/qlzj8wW.jpg')" }}
     >
-      {/* Hero Section */}
+ 
       {!showForm && (
         <div className="hero min-h-screen">
           <div className="hero-content text-center">
             <div className="max-w-md">
-              <h1 className="mb-5 text-6xl text-gray-800 font-bold">
+              <h1 className="mb-5 text-5xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 bg-clip-text text-transparent drop-shadow-lg">
                 Welcome to Your Personal Diary
               </h1>
               <p className="mb-5 text-3xl">
                 Write your daily thoughts, emotions, and stories.
               </p>
-              <button className="btn btn-primary" onClick={() => setShowForm(true)}>
-                Add New Entry
-              </button>
+              <div className="space-x-4">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => setShowForm(true)}
+                >
+                  ➕ Add New Entry
+                </button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShowList(!showList)}
+                >
+                  📖 {showList ? "Hide Entries" : "Show Entries"}
+                </button>
+                <button></button>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Main App Section */}
+   
       {showForm && (
-        <div className="bg-black/50 min-h-screen px-4 py-6 backdrop-blur-sm">
+        <div className="p-4 bg-black/30 backdrop-blur-sm rounded-lg m-4">
           <Header onAdd={() => setShowForm(true)} />
           <EntryForm onSave={addEntry} onCancel={() => setShowForm(false)} />
-          <EntryList entries={entries} onDelete={deleteEntry} />
-          <Fotter />
         </div>
       )}
 
-      {/* Show entries even if form not showing */}
-      {!showForm && entries.length > 0 && (
-        <div className="bg-black/40 px-4 py-6 backdrop-blur-sm">
+      {showList && (
+        <div className="p-4 bg-black/30 backdrop-blur-sm rounded-lg m-4">
           <EntryList entries={entries} onDelete={deleteEntry} />
-          <Fotter />
         </div>
       )}
+    
+
+      <Fotter />
     </div>
   );
 };
