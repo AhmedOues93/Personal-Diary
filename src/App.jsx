@@ -30,16 +30,24 @@ const App = () => {
     setShowForm(false);
   };
 
+  const deleteEntry = (date) => {
+    const updated = entries.filter((entry) => entry.date !== date);
+    setEntries(updated);
+  };
+
   return (
-    <div className="min-h-screen bg-cover bg-center"
+    <div
+      className="min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/qlzj8wW.jpg')" }}
     >
       {/* Hero Section */}
       {!showForm && (
-        <div className="hero min-h-screen  ">
+        <div className="hero min-h-screen">
           <div className="hero-content text-center">
             <div className="max-w-md">
-              <h1 className="mb-5 text-6xl  text-gray-800 font-bold">Welcome to Your Personal Diary</h1>
+              <h1 className="mb-5 text-6xl text-gray-800 font-bold">
+                Welcome to Your Personal Diary
+              </h1>
               <p className="mb-5 text-3xl">
                 Write your daily thoughts, emotions, and stories.
               </p>
@@ -51,12 +59,20 @@ const App = () => {
         </div>
       )}
 
-      {/* Main App */}
+      {/* Main App Section */}
       {showForm && (
-        <div className="p-4  bg-opacity-50">
+        <div className="bg-black/50 min-h-screen px-4 py-6 backdrop-blur-sm">
           <Header onAdd={() => setShowForm(true)} />
           <EntryForm onSave={addEntry} onCancel={() => setShowForm(false)} />
-          <EntryList entries={entries} />
+          <EntryList entries={entries} onDelete={deleteEntry} />
+          <Fotter />
+        </div>
+      )}
+
+      {/* Show entries even if form not showing */}
+      {!showForm && entries.length > 0 && (
+        <div className="bg-black/40 px-4 py-6 backdrop-blur-sm">
+          <EntryList entries={entries} onDelete={deleteEntry} />
           <Fotter />
         </div>
       )}

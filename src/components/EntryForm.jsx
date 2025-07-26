@@ -28,19 +28,19 @@ const EntryForm = ({ onSave, onCancel }) => {
 
   return (
     <div className=" bg-opacity-50 p-4  border-2 rounded shadow mt-4">
-      <h2 className="text-lg font-bold mb-2">Add New Entry</h2>
+      <h2 className="text-lg  text-white font-bold mb-2">Add New Entry</h2>
       <form onSubmit={handleSubmit} className="space-y-2">
         <input
           type="text"
           placeholder="Title"
-          className="w-full border p-2 rounded"
+          className="w-full border  text-white p-2 rounded"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
         <input
           type="date"
-          className="w-full border p-2 rounded"
+          className="w-full border text-white  p-2 rounded"
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
@@ -48,14 +48,14 @@ const EntryForm = ({ onSave, onCancel }) => {
         <input
           type="text"
           placeholder="Image URL"
-          className="w-full border p-2 rounded"
+          className="w-full border   text-white p-2 rounded"
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
 
         <textarea
           placeholder="Content"
-          className="w-full border p-2 rounded"
+          className="w-full border text-white  p-2 rounded"
           rows="4"
           value={content}
           onChange={(e) => setContent(e.target.value)}

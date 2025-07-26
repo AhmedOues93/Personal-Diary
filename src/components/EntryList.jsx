@@ -1,17 +1,13 @@
-import EntryCard from "./EntryCard"
+import EntryCard from "./EntryCard";
 
-const EntryList = ({entries}) => {
-
+const EntryList = ({ entries, onDelete }) => {
   return (
-
-    <div className="grid grid-cols-1 md:grid-col-2 gap-5">
-        {entries.map((entry, index)=> [
-            <EntryCard key={index} entry={entry} />
-
-        ])}
-      
+    <div className="grid gap-4 p-4 sm:grid-cols-2 md:grid-cols-3">
+      {entries.map((entry) => (
+        <EntryCard key={entry.date} entry={entry} onDelete={onDelete} />
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default EntryList
+export default EntryList;
