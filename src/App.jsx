@@ -35,58 +35,59 @@ const App = () => {
   };
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/qlzj8wW.jpg')" }}
-    >
- 
-      {!showForm && (
-        <div className="hero min-h-screen">
-          <div className="hero-content text-center">
-            <div className="max-w-md">
-              <h1 className="mb-5 text-5xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 bg-clip-text text-transparent drop-shadow-lg">
-                Welcome to Your Personal Diary
-              </h1>
-              <p className="mb-5 text-3xl">
-                Write your daily thoughts, emotions, and stories.
-              </p>
-              <div className="space-x-4">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => setShowForm(true)}
-                >
-                  ➕ Add New Entry
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => setShowList(!showList)}
-                >
-                  📖 {showList ? "Hide Entries" : "Show Entries"}
-                </button>
-                <button></button>
-              </div>
-            </div>
+   <div
+  className="min-h-screen bg-cover bg-center"
+  style={{ backgroundImage: "url('/qlzj8wW.jpg')" }}
+>
+  {!showForm && (
+    <div className="hero min-h-screen">
+      <div className="hero-content text-center">
+        <div className="max-w-md">
+          <h1 className="mb-5 text-5xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 bg-clip-text text-transparent drop-shadow-lg">
+            Welcome to Your Personal Diary
+          </h1>
+          <p className="mb-5 text-3xl">
+            Write your daily thoughts, emotions, and stories.
+          </p>
+          <div className="space-x-4">
+            <button
+              className="btn btn-primary"
+              onClick={() => setShowForm(true)}
+            >
+              ➕ Add New Entry
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => setShowList(!showList)}
+            >
+              📖 {showList ? "Hide Entries" : "Show Entries"}
+            </button>
           </div>
         </div>
-      )}
-
-   
-      {showForm && (
-        <div className="p-4 bg-black/30 backdrop-blur-sm rounded-lg m-4">
-          <Header onAdd={() => setShowForm(true)} />
-          <EntryForm onSave={addEntry} onCancel={() => setShowForm(false)} />
-        </div>
-      )}
-
-      {showList && (
-        <div className="p-4 bg-black/30 backdrop-blur-sm rounded-lg m-4">
-          <EntryList entries={entries} onDelete={deleteEntry} />
-        </div>
-      )}
-    
-
-      <Fotter />
+      </div>
     </div>
+  )}
+
+  {showForm && (
+    <div className="flex justify-center items-center min-h-screen p-4">
+      <div className=" w-full max-w-xl">
+        <Header onAdd={() => setShowForm(true)} />
+        <EntryForm onSave={addEntry} onCancel={() => setShowForm(false)} />
+      </div>
+    </div>
+  )}
+
+  {showList && (
+    <div className="flex justify-center p-4">
+     <div className="p-4 sm:p-6 rounded-lg w-full">
+  <EntryList entries={entries} onDelete={deleteEntry} />
+</div>
+    </div>
+  )}
+
+  <Fotter />
+</div>
+
   );
 };
 

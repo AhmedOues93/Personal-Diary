@@ -3,7 +3,7 @@ const EntryCard = ({ entry, onDelete }) => {
     if (!entry) return null;
   return (
     
-    <div className=" text-white shadow-md rounded-xl p-4  relative">
+    <div className=" text-white  bg-black/40  shadow-md rounded-xl p-4  relative">
         
       <button
         onClick={() => onDelete(entry.date)}
