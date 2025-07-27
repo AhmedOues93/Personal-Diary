@@ -25,7 +25,7 @@ A simple personal diary application built with **React**, styled using **Tailwin
 
 ## 📁 Project Structure
 
-src/
+```src/
 │
 ├── components/
 │   ├── EntryForm.jsx
@@ -35,4 +35,4 @@ src/
 │   └── Header.jsx
 │
 ├── App.jsx
-└── index.css
+└── index.css```
