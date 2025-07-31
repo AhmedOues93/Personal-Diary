@@ -3,20 +3,20 @@ import { useState } from "react";
 const EntryForm = ({ onSave, onCancel }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [image, setImage] = useState("");
+  const [imageUrl, setImage] = useState("");
   const [content, setContent] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     
-    if (!title || !date || !image || !content) {
+    if (!title || !date || !imageUrl || !content) {
       alert("Please fill in all fields.");
       return;
     }
 
     
-    const newEntry = { title, date, image, content };
+    const newEntry = { title, date, imageUrl, content };
     onSave(newEntry);
 
     
@@ -51,7 +51,7 @@ const EntryForm = ({ onSave, onCancel }) => {
           type="text"
           placeholder="Image URL"
           className="w-full border text-white p-2 rounded bg-transparent"
-          value={image}
+          value={imageUrl}
           onChange={(e) => setImage(e.target.value)}
         />
 

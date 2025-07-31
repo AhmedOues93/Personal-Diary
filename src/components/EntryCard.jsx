@@ -1,6 +1,7 @@
 const EntryCard = ({ entry, onDelete }) => {
     
     if (!entry) return null;
+    console.log("🧪 entry:", entry);
   return (
     
     <div className=" text-white  bg-black/40  shadow-md rounded-xl p-4  relative">
@@ -12,19 +13,26 @@ const EntryCard = ({ entry, onDelete }) => {
       >
         🗑️
       </button>
-       {entry.imageUrl && (
-        <img
-          src={entry.imageUrl}
-          alt={entry.title}
-          className="w-full h-48 object-cover rounded-lg mb-3"
-        />
-      )}
+     
+ {entry.imageUrl && (
+  <img
+    src={entry.imageUrl}
+    alt={entry.title}
+    className="w-full h-48 object-cover rounded-lg mb-3"
+  />
+   
+)}
+ 
+
       <h2 className="text-xl font-bold mb-2">📝 {entry.title}</h2>
 
       <p className="text-sm text-gray-300 mb-1">📅 {entry.date}</p>
       <p className="whitespace-pre-wrap text-gray-100">{entry.content}</p>
     </div>
   );
+
+
+
 };
 
 export default EntryCard;
