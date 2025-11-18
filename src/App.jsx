@@ -3,36 +3,56 @@ import Header from "./components/Header";
 import EntryForm from "./components/EntryForm";
 import EntryList from "./components/EntryList";
 import Fotter from "./components/Fotter";
+import api from "./services/api";
+
 
 const App = () => {
   const [entries, setEntries] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [showList, setShowList] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  //daten Hiolen von backen 
   useEffect(() => {
-    const storedEntries = JSON.parse(localStorage.getItem("entries")) || [];
-    setEntries(storedEntries);
+    const fetchEntries = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get("/entries");
+        setEntries(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("error bei laden entries", error);
+        setLoading(false);
+      }
+    };
+    fetchEntries();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("entries", JSON.stringify(entries));
-  }, [entries]);
-
-  const addEntry = (newEntry) => {
-    const exist = entries.some((e) => e.date === newEntry.date);
-    if (exist) {
-      alert("There is already an entry in  this date, Write it  another day!");
-      return;
+  //daten hinzufügen
+  const addEntry = async (entry) => {
+    try {
+      setLoading(true);
+      const response = await api.post("/entries", entry);
+      setEntries([...entries, response.data]);
+      setLoading(false);
+    } catch (error) {
+       alert("Fehler beim Hinzufügen des Eintrags");
     }
-    const update = [newEntry, ...entries];
-    setEntries(update);
-    setShowForm(false);
   };
 
-  const deleteEntry = (date) => {
-    const updated = entries.filter((entry) => entry.date !== date);
-    setEntries(updated);
+  //daten löschen
+  const deleteEntry = async (entry) => {
+    try {
+      setLoading(true);
+      const response = await api.delete(`/entries/${entry.id}`);
+      setEntries(entries.filter((e) => e.id !== entry.id));
+      setLoading(false);
+    } catch (error) {
+     alert("Fehler beim Löschen des Eintrags");
+    }
   };
+
+
 
   return (
    <div
