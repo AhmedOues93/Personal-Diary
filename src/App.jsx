@@ -35,23 +35,22 @@ const App = () => {
       const response = await api.post("/entries", entry);
       setEntries([...entries, response.data]);
       setLoading(false);
-    } catch (error) {
+    } catch  {
        alert("Fehler beim Hinzufügen des Eintrags");
     }
   };
 
   //daten löschen
-  const deleteEntry = async (entry) => {
-    try {
-      setLoading(true);
-      const response = await api.delete(`/entries/${entry.id}`);
-      setEntries(entries.filter((e) => e.id !== entry.id));
-      setLoading(false);
-    } catch (error) {
-     alert("Fehler beim Löschen des Eintrags");
-    }
-  };
-
+const deleteEntry = async (entry) => {
+  try {
+    setLoading(true);
+    await api.delete(`/entries/${entry.id}`);
+    setEntries(entries.filter((e) => e.id !== entry.id));
+    setLoading(false);
+  }catch  {
+  alert("Fehler beim Löschen des Eintrags");
+}
+};
 
 
   return (
